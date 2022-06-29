@@ -1,6 +1,8 @@
-import { getConfig } from './build-config';
-
-export {
-
-    getConfig,    
-}
+import { 
+    getConfig,
+  } from './build-config';
+  
+  export {
+    getConfig,
+  }
+  

@@ -1,17 +1,17 @@
 {
   "version": "20.0.0",
   "files": {
-    "c5a3c4ba3f2ba0ad205bbed33ea40431e0627a16f6623ab5cbab253c394c4326": {
+    "60b95e79a5ba959baf284f08a89fd04f2654c5fde5b862cf327856ab5627b652": {
       "source": {
         "path": "BitirmeVpcStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "717917102233-eu-central-1": {
-          "bucketName": "cdk-hnb659fds-assets-717917102233-eu-central-1",
-          "objectKey": "c5a3c4ba3f2ba0ad205bbed33ea40431e0627a16f6623ab5cbab253c394c4326.json",
+        "685655032460-eu-central-1": {
+          "bucketName": "cdk-hnb659fds-assets-685655032460-eu-central-1",
+          "objectKey": "60b95e79a5ba959baf284f08a89fd04f2654c5fde5b862cf327856ab5627b652.json",
           "region": "eu-central-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-file-publishing-role-717917102233-eu-central-1"
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-file-publishing-role-685655032460-eu-central-1"
         }
       }
     }

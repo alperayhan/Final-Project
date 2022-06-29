@@ -1,10 +1,10 @@
 {
   "infra": {
-    "account": "717917102233",
+    "account": "685655032460",
     "region": "eu-central-1",
-    "vpcId": "vpc-038c375b10545b90c",
-    "availabilityZones": ["eu-central-1a"],
-    "publicSubnetIds": ["subnet-06a04bfc4e6343ed1"]
+    "vpcId": "vpc-0ce884638d6266990",
+    "availabilityZones": ["eu-central-1a", "eu-central-1b"],
+    "publicSubnetIds": ["subnet-0875a2fa36cd81115", "subnet-06b5a567966d2bd82"]
 
 
   }

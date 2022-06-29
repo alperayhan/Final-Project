@@ -1,7 +1,7 @@
 {
   "version": "20.0.0",
   "files": {
-    "bcf6c99972ad2f303684d7ca90e568e9449591f9d051443b09aa75eb99bd15a2": {
+    "b2e23359346053b37c5a9ce810fb1371987bcb23a5e4cf28cd18923434c5a611": {
       "source": {
         "path": "BitirmeECSFargateStack.template.json",
         "packaging": "file"
@@ -9,7 +9,7 @@
       "destinations": {
         "current_account-current_region": {
           "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
-          "objectKey": "bcf6c99972ad2f303684d7ca90e568e9449591f9d051443b09aa75eb99bd15a2.json",
+          "objectKey": "b2e23359346053b37c5a9ce810fb1371987bcb23a5e4cf28cd18923434c5a611.json",
           "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
         }
       }

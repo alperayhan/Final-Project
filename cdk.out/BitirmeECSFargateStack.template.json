@@ -49,7 +49,7 @@
           {
            "Ref": "AWS::Partition"
           },
-          ":ecr:eu-central-1:717917102233:repository/bitirme-backend"
+          ":ecr:eu-central-1:685655032460:repository/bitirme-backend"
          ]
         ]
        }
@@ -120,7 +120,7 @@
                 {
                  "Ref": "AWS::Partition"
                 },
-                ":ecr:eu-central-1:717917102233:repository/bitirme-backend"
+                ":ecr:eu-central-1:685655032460:repository/bitirme-backend"
                ]
               ]
              }
@@ -143,7 +143,7 @@
                 {
                  "Ref": "AWS::Partition"
                 },
-                ":ecr:eu-central-1:717917102233:repository/bitirme-backend"
+                ":ecr:eu-central-1:685655032460:repository/bitirme-backend"
                ]
               ]
              }
@@ -205,7 +205,7 @@
       "IpProtocol": "-1"
      }
     ],
-    "VpcId": "vpc-024cc70aca0f57d32"
+    "VpcId": "vpc-0ce884638d6266990"
    },
    "Metadata": {
     "aws:cdk:path": "BitirmeECSFargateStack/BitirmeBackendECSFargateSecurityGroup/Resource"
@@ -233,6 +233,128 @@
    },
    "Metadata": {
     "aws:cdk:path": "BitirmeECSFargateStack/BitirmeBackendECSFargateSecurityGroup/from BitirmeECSFargateStackALBsgA6150BA6:49153-65535"
+   }
+  },
+  "BitirmeBackendECSFargateSecurityGroupfromBitirmeECSFargateStackALBsgA6150BA68080EA121317": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 8080,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "BitirmeBackendECSFargateSecurityGroup4CED8204",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ALBsgDBC6A4CD",
+      "GroupId"
+     ]
+    },
+    "ToPort": 8080
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSFargateStack/BitirmeBackendECSFargateSecurityGroup/from BitirmeECSFargateStackALBsgA6150BA6:8080"
+   }
+  },
+  "BitirmeBackendFargateService2566D142": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Fn::ImportValue": "BitirmeCloudECSClusterName"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DesiredCount": 3,
+    "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 60,
+    "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "bitirme-backend-service",
+      "ContainerPort": 8080,
+      "TargetGroupArn": {
+       "Ref": "ServiceTargetGroup2CF394BF"
+      }
+     }
+    ],
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "BitirmeBackendECSFargateSecurityGroup4CED8204",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       "subnet-0875a2fa36cd81115",
+       "subnet-06b5a567966d2bd82"
+      ]
+     }
+    },
+    "ServiceName": "bitirme-backend-service",
+    "TaskDefinition": {
+     "Ref": "BitirmeBackendFargateServiceTaskDef5846DD0F"
+    }
+   },
+   "DependsOn": [
+    "BitirmeBackendALBhttpListener45C1BB8D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSFargateStack/BitirmeBackendFargateService/Service"
+   }
+  },
+  "BitirmeBackendFargateServiceTaskCountTargetCC8CBE9B": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 8,
+    "MinCapacity": 1,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "service/",
+       {
+        "Fn::ImportValue": "BitirmeCloudECSClusterName"
+       },
+       "/",
+       {
+        "Fn::GetAtt": [
+         "BitirmeBackendFargateService2566D142",
+         "Name"
+        ]
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
+      ]
+     ]
+    },
+    "ScalableDimension": "ecs:service:DesiredCount",
+    "ServiceNamespace": "ecs"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSFargateStack/BitirmeBackendFargateService/TaskCount/Target/Resource"
    }
   },
   "ALBsgDBC6A4CD": {
@@ -263,16 +385,92 @@
       "ToPort": 443
      }
     ],
-    "VpcId": "vpc-024cc70aca0f57d32"
+    "VpcId": "vpc-0ce884638d6266990"
    },
    "Metadata": {
     "aws:cdk:path": "BitirmeECSFargateStack/ALBsg/Resource"
    }
   },
+  "BitirmeBackendALB755179AF": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Name": "bitirme-cloud-alb",
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "ALBsgDBC6A4CD",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     "subnet-0875a2fa36cd81115",
+     "subnet-06b5a567966d2bd82"
+    ],
+    "Type": "application"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSFargateStack/BitirmeBackendALB/Resource"
+   }
+  },
+  "BitirmeBackendALBhttpListener45C1BB8D": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "ServiceTargetGroup2CF394BF"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "BitirmeBackendALB755179AF"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSFargateStack/BitirmeBackendALB/httpListener/Resource"
+   }
+  },
+  "ServiceTargetGroup2CF394BF": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckEnabled": true,
+    "HealthCheckPath": "/",
+    "HealthCheckPort": "8080",
+    "HealthCheckProtocol": "HTTP",
+    "Matcher": {
+     "HttpCode": "200"
+    },
+    "Name": "bitirme-backend-tg",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": "vpc-0ce884638d6266990"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSFargateStack/ServiceTargetGroup/Resource"
+   }
+  },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31PTQ/BQBD9Le7bQTk4I8RNyl3Gdshouyszu0Sa/ndtEYmD03vz5uO9SSGdwXiAd01sXiQlH6HeBbSFyUh9FEum7R1qncA82oLCHJUMYwV15ksyi5PrcetLto+ufLHGkFWoVyhnDLRHLZZ0YseBveumfhXvArIj+WrdhbQNQzYKh8dafLx2m/+FjTsLqTZNHwUFKwokfczPPy1v7fK3ifM5wUWHt/EMpjAaXJQ5kegCVwTZC590tqruJQEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31RwU7DMAz9lt2zwAqHXekQCIkD2rgjN/Uqr2kyxenQVPXfcdOtdBw42X7Pfs9xMp2t9WoB37w0Zb20VOhuF8HUaovs22BQCffV8YPOW1NjzIFRETS623qLarN3KX54S+Y8lGPWKzSsuxcIFUT8BK6fcU+OInk3dP1FvItADsMMu8zuMJzIJKdrujNgobBJduNbFwe3TBZH0waK59fg2+M48B/w5qqAzL2C41F2hsEV2uhZ5MlVojf5hApjmr9BxNYCRzLWQ1kI44zMnWSTp1/Fd+HyxGEYJG7qeR9xRHfpueYzfrScXjIr+z7dHQI0GEeB6fMkl9uW6aK9cr5EfeC702qtH/X94sBEyyAHpAb1dow/nzMKDhICAAA="
    },
    "Metadata": {
     "aws:cdk:path": "BitirmeECSFargateStack/CDKMetadata/Default"

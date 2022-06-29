@@ -1,6 +1,6 @@
-import { BitirmeVpnStack } from './vpn-server-stack';
+import { BitirmeVPNServer } from './vpn-server-stack';
 
 export {
 
-    BitirmeVpnStack,    
+    BitirmeVPNServer,    
 }

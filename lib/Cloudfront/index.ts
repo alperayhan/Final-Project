@@ -1,6 +1,6 @@
-import { BitirmeCDNStack } from "./bitirme-cdn-stack";
+import { BitirmeCDNCloudfront } from "./bitirme-cdn-stack";
 
 export {
-BitirmeCDNStack,
+    BitirmeCDNCloudfront,
 
 }

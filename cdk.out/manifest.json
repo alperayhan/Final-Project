@@ -17,20 +17,20 @@
     },
     "BitirmeECSClusterStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://717917102233/eu-central-1",
+      "environment": "aws://685655032460/eu-central-1",
       "properties": {
         "templateFile": "BitirmeECSClusterStack.template.json",
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-deploy-role-717917102233-eu-central-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-cfn-exec-role-717917102233-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-717917102233-eu-central-1/46a58b3e4b3fff8377eeab65b53b4493de5014126f9daa8d38f479bce4eceead.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-deploy-role-685655032460-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-cfn-exec-role-685655032460-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-685655032460-eu-central-1/706ecde8b27c7933bfd0f5f716bc97d4046676422032ab106a3867d27f1bba55.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "BitirmeECSClusterStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-lookup-role-717917102233-eu-central-1",
+          "arn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-lookup-role-685655032460-eu-central-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
@@ -39,6 +39,78 @@
         "BitirmeECSClusterStack.assets"
       ],
       "metadata": {
+        "/BitirmeECSClusterStack/Vpc/PublicSubnet1": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "No routeTableId was provided to the subnet 'subnet-0875a2fa36cd81115'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171)",
+            "trace": [
+              "Annotations.addMessage (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1213)",
+              "Annotations.addWarning (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/core/lib/annotations.js:1:600)",
+              "new ImportedSubnet (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:27267)",
+              "Function.fromSubnetAttributes (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:18027)",
+              "/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/util.js:1:1765",
+              "Array.map (<anonymous>)",
+              "ImportSubnetGroup.import (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/util.js:1:1685)",
+              "new ImportedVpc (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:24462)",
+              "Function.fromVpcAttributes (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:11323)",
+              "new BitirmeECSClusterStack (/Users/alperayhan/Desktop/bitirme/lib/ecs/ecs-cluster-stack.ts:15:29)",
+              "Object.<anonymous> (/Users/alperayhan/Desktop/bitirme/bin/bitirme-computing.ts:17:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Module.m._compile (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/index.ts:1597:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/index.ts:1600:12)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "phase4 (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:579:12)",
+              "bootstrap (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:85:10)",
+              "main (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:54:10)",
+              "Object.<anonymous> (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:729:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/BitirmeECSClusterStack/Vpc/PublicSubnet2": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "No routeTableId was provided to the subnet 'subnet-06b5a567966d2bd82'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171)",
+            "trace": [
+              "Annotations.addMessage (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1213)",
+              "Annotations.addWarning (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/core/lib/annotations.js:1:600)",
+              "new ImportedSubnet (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:27267)",
+              "Function.fromSubnetAttributes (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:18027)",
+              "/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/util.js:1:1765",
+              "Array.map (<anonymous>)",
+              "ImportSubnetGroup.import (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/util.js:1:1685)",
+              "new ImportedVpc (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:24462)",
+              "Function.fromVpcAttributes (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:11323)",
+              "new BitirmeECSClusterStack (/Users/alperayhan/Desktop/bitirme/lib/ecs/ecs-cluster-stack.ts:15:29)",
+              "Object.<anonymous> (/Users/alperayhan/Desktop/bitirme/bin/bitirme-computing.ts:17:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Module.m._compile (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/index.ts:1597:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/index.ts:1600:12)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "phase4 (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:579:12)",
+              "bootstrap (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:85:10)",
+              "main (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:54:10)",
+              "Object.<anonymous> (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:729:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
         "/BitirmeECSClusterStack/BitirmeCloudECSCluster/Resource": [
           {
             "type": "aws:cdk:logicalId",
@@ -90,70 +162,285 @@
       },
       "displayName": "BitirmeECSClusterStack"
     },
-    "BitirmeBackendECRClusterStack.assets": {
+    "BitirmeBackendECRStack.assets": {
       "type": "cdk:asset-manifest",
       "properties": {
-        "file": "BitirmeBackendECRClusterStack.assets.json",
+        "file": "BitirmeBackendECRStack.assets.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
       }
     },
-    "BitirmeBackendECRClusterStack": {
+    "BitirmeBackendECRStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://717917102233/eu-central-1",
+      "environment": "aws://685655032460/eu-central-1",
       "properties": {
-        "templateFile": "BitirmeBackendECRClusterStack.template.json",
+        "templateFile": "BitirmeBackendECRStack.template.json",
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-deploy-role-717917102233-eu-central-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-cfn-exec-role-717917102233-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-717917102233-eu-central-1/9ac1328a2caba2cdd15c61a6a85949a364e91877294d86d3e2e354cee5488ab4.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-deploy-role-685655032460-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-cfn-exec-role-685655032460-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-685655032460-eu-central-1/baf51fcb167d72765b7f4f930e13b7e92f39a0f5ce16a9e8d66dc78c1ebbe842.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
-          "BitirmeBackendECRClusterStack.assets"
+          "BitirmeBackendECRStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-lookup-role-717917102233-eu-central-1",
+          "arn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-lookup-role-685655032460-eu-central-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
       },
       "dependencies": [
-        "BitirmeBackendECRClusterStack.assets"
+        "BitirmeBackendECRStack.assets"
       ],
       "metadata": {
-        "/BitirmeBackendECRClusterStack/BitirmeBackendECRRepository/Resource": [
+        "/BitirmeBackendECRStack/BitirmeBackendECRRepository/Resource": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BitirmeBackendECRRepositoryC83C6EF2"
           }
         ],
-        "/BitirmeBackendECRClusterStack/BitirmeBackendECRRepositoryARN": [
+        "/BitirmeBackendECRStack/BitirmeBackendECRRepositoryARN": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BitirmeBackendECRRepositoryARN"
           }
         ],
-        "/BitirmeBackendECRClusterStack/CDKMetadata/Default": [
+        "/BitirmeBackendECRStack/CDKMetadata/Default": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CDKMetadata"
           }
         ],
-        "/BitirmeBackendECRClusterStack/BootstrapVersion": [
+        "/BitirmeBackendECRStack/BootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "BootstrapVersion"
           }
         ],
-        "/BitirmeBackendECRClusterStack/CheckBootstrapVersion": [
+        "/BitirmeBackendECRStack/CheckBootstrapVersion": [
           {
             "type": "aws:cdk:logicalId",
             "data": "CheckBootstrapVersion"
           }
         ]
       },
-      "displayName": "BitirmeBackendECRClusterStack"
+      "displayName": "BitirmeBackendECRStack"
+    },
+    "BitirmeECSFargateStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "BitirmeECSFargateStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "BitirmeECSFargateStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "BitirmeECSFargateStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/b2e23359346053b37c5a9ce810fb1371987bcb23a5e4cf28cd18923434c5a611.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "BitirmeECSFargateStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "BitirmeECSFargateStack.assets"
+      ],
+      "metadata": {
+        "/BitirmeECSFargateStack/Vpc/PublicSubnet1": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "No routeTableId was provided to the subnet 'subnet-0875a2fa36cd81115'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171)",
+            "trace": [
+              "Annotations.addMessage (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1213)",
+              "Annotations.addWarning (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/core/lib/annotations.js:1:600)",
+              "new ImportedSubnet (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:27267)",
+              "Function.fromSubnetAttributes (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:18027)",
+              "/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/util.js:1:1765",
+              "Array.map (<anonymous>)",
+              "ImportSubnetGroup.import (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/util.js:1:1685)",
+              "new ImportedVpc (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:24462)",
+              "Function.fromVpcAttributes (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:11323)",
+              "new ECSFargateStack (/Users/alperayhan/Desktop/bitirme/lib/ecs/ecs-fargate-stack.ts:26:31)",
+              "Object.<anonymous> (/Users/alperayhan/Desktop/bitirme/bin/bitirme-computing.ts:20:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Module.m._compile (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/index.ts:1597:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/index.ts:1600:12)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "phase4 (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:579:12)",
+              "bootstrap (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:85:10)",
+              "main (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:54:10)",
+              "Object.<anonymous> (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:729:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/BitirmeECSFargateStack/Vpc/PublicSubnet2": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "No routeTableId was provided to the subnet 'subnet-06b5a567966d2bd82'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171)",
+            "trace": [
+              "Annotations.addMessage (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1213)",
+              "Annotations.addWarning (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/core/lib/annotations.js:1:600)",
+              "new ImportedSubnet (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:27267)",
+              "Function.fromSubnetAttributes (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:18027)",
+              "/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/util.js:1:1765",
+              "Array.map (<anonymous>)",
+              "ImportSubnetGroup.import (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/util.js:1:1685)",
+              "new ImportedVpc (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:24462)",
+              "Function.fromVpcAttributes (/Users/alperayhan/Desktop/bitirme/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:11323)",
+              "new ECSFargateStack (/Users/alperayhan/Desktop/bitirme/lib/ecs/ecs-fargate-stack.ts:26:31)",
+              "Object.<anonymous> (/Users/alperayhan/Desktop/bitirme/bin/bitirme-computing.ts:20:1)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Module.m._compile (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/index.ts:1597:23)",
+              "Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Object.require.extensions.<computed> [as .ts] (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/index.ts:1600:12)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "phase4 (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:579:12)",
+              "bootstrap (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:85:10)",
+              "main (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:54:10)",
+              "Object.<anonymous> (/Users/alperayhan/Desktop/bitirme/node_modules/ts-node/src/bin.ts:729:3)",
+              "Module._compile (node:internal/modules/cjs/loader:1112:14)",
+              "Object.Module._extensions..js (node:internal/modules/cjs/loader:1166:10)",
+              "Module.load (node:internal/modules/cjs/loader:988:32)",
+              "Function.Module._load (node:internal/modules/cjs/loader:834:12)",
+              "Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:77:12)",
+              "node:internal/main/run_main_module:17:47"
+            ]
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendFargateServiceIAMRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendFargateServiceIAMRole680A6FBD"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendFargateServiceIAMRole/DefaultPolicy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendFargateServiceIAMRoleDefaultPolicy85D9A35B"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendFargateServiceTaskDef/TaskRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendFargateServiceTaskDefTaskRole812DDA16"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendFargateServiceTaskDef/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendFargateServiceTaskDef5846DD0F"
+          }
+        ],
+        "/BitirmeECSFargateStack/DB_PASSWORD.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DBPASSWORDParameter"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendECSFargateSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendECSFargateSecurityGroup4CED8204"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendECSFargateSecurityGroup/from BitirmeECSFargateStackALBsgA6150BA6:49153-65535": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendECSFargateSecurityGroupfromBitirmeECSFargateStackALBsgA6150BA64915365535254C20DF"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendECSFargateSecurityGroup/from BitirmeECSFargateStackALBsgA6150BA6:8080": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendECSFargateSecurityGroupfromBitirmeECSFargateStackALBsgA6150BA68080EA121317"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendFargateService/Service": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendFargateService2566D142"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendFargateService/TaskCount/Target/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendFargateServiceTaskCountTargetCC8CBE9B"
+          }
+        ],
+        "/BitirmeECSFargateStack/ALBsg/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ALBsgDBC6A4CD"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendALB/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendALB755179AF"
+          }
+        ],
+        "/BitirmeECSFargateStack/BitirmeBackendALB/httpListener/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendALBhttpListener45C1BB8D"
+          }
+        ],
+        "/BitirmeECSFargateStack/ServiceTargetGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ServiceTargetGroup2CF394BF"
+          }
+        ],
+        "/BitirmeECSFargateStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/BitirmeECSFargateStack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/BitirmeECSFargateStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/BitirmeECSFargateStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "BitirmeECSFargateStack"
     },
     "BitirmeServicesEnvBucketStack.assets": {
       "type": "cdk:asset-manifest",
@@ -165,20 +452,20 @@
     },
     "BitirmeServicesEnvBucketStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://717917102233/eu-central-1",
+      "environment": "aws://685655032460/eu-central-1",
       "properties": {
         "templateFile": "BitirmeServicesEnvBucketStack.template.json",
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-deploy-role-717917102233-eu-central-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-cfn-exec-role-717917102233-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-717917102233-eu-central-1/6fcba336c3a436fab9db4c5c8a01f7f344a5a2dcb09ad55d32d22c1c4e38f00b.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-deploy-role-685655032460-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-cfn-exec-role-685655032460-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-685655032460-eu-central-1/a8af20b7cb785b88ac82ff7ce5bfdfe0143eba2549438ac483548962ee8bbbb3.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "BitirmeServicesEnvBucketStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-lookup-role-717917102233-eu-central-1",
+          "arn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-lookup-role-685655032460-eu-central-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }
@@ -236,20 +523,20 @@
     },
     "BitirmeCDNBucket": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://717917102233/eu-central-1",
+      "environment": "aws://685655032460/eu-central-1",
       "properties": {
         "templateFile": "BitirmeCDNBucket.template.json",
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-deploy-role-717917102233-eu-central-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-cfn-exec-role-717917102233-eu-central-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-717917102233-eu-central-1/2299a85f6c568da1e3f415a860e52212661151d10bed6a1aee532ca6e1643e9c.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-deploy-role-685655032460-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-cfn-exec-role-685655032460-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-685655032460-eu-central-1/870e5faa8770966419a35a1928f1351ab0d82b79de4ad751e1861e11029d250e.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "BitirmeCDNBucket.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-lookup-role-717917102233-eu-central-1",
+          "arn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-lookup-role-685655032460-eu-central-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }

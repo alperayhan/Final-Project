@@ -6,7 +6,7 @@ import { Construct } from 'constructs';
 import { PrincipalBase } from 'aws-cdk-lib/aws-iam';
 import { InstanceSize, Vpc, VpcEndpoint } from 'aws-cdk-lib/aws-ec2';
 
-export class BitirmeVpnStack extends Stack {
+export class BitirmeVPNServer extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
     const vpcId = scope.node.tryGetContext('vpcId');

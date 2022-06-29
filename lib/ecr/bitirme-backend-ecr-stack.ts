@@ -1,29 +1,25 @@
-import { CfnOutput, cfnTagToCloudFormation, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
+import { RemovalPolicy, Stack, StackProps, CfnOutput } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
- import {
+import {
   aws_ecr
- } from 'aws-cdk-lib';
+} from 'aws-cdk-lib';
 
- import { getConfig } from '../config';
+export class BitirmeBackendECRStack extends Stack {
 
- 
-export class BitirmeBackendECRClusterStack extends Stack {
-   
-  ecrRepo: aws_ecr.Repository;  
-    constructor(scope: Construct, id: string, props?: StackProps) {
+  ecrRepo: aws_ecr.Repository;
+
+  constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    
     this.ecrRepo = new aws_ecr.Repository(this, 'BitirmeBackendECRRepository', {
-    repositoryName: 'bitirme-backend',
-    removalPolicy: RemovalPolicy.RETAIN,
-     });
+      repositoryName: 'bitirme-backend',
+      removalPolicy: RemovalPolicy.DESTROY,
+    });
 
-    new CfnOutput(this,'BitirmeBackendECRRepositoryARN', {
-        exportName:'BitirmeBackendECRRepositoryARN',
-        value: this.ecrRepo.repositoryArn,
-
-    } );
-  
+    new CfnOutput(this, 'BitirmeBackendECRRepositoryARN', {
+      exportName: 'BitirmeBackendECRRepositoryARN',
+      value: this.ecrRepo.repositoryArn,
+    });
+    
   }
 }

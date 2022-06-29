@@ -6,7 +6,7 @@ import {
 } from 'aws-cdk-lib';
 
 
-export class BitirmeCDNStack extends Stack {
+export class BitirmeCDNCloudfront extends Stack {
 
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);

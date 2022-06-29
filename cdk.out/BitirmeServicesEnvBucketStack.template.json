@@ -3,7 +3,7 @@
   "BitirmeServicesEnvBucketBBA4484B": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
-    "BucketName": "717917102233-eu-central-1-bitirme-services-env-bucket",
+    "BucketName": "685655032460-eu-central-1-bitirme-services-env-bucket",
     "PublicAccessBlockConfiguration": {
      "BlockPublicAcls": true,
      "BlockPublicPolicy": true,

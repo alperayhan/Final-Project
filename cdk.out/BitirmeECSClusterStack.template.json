@@ -13,7 +13,7 @@
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
     "GroupDescription": "BitirmeECSClusterStack/BitirmeCloudECSClusterSecurityGroup",
-    "GroupName": "Bitirme-cloud-ecs-cluster-sg",
+    "GroupName": "bitirme-cloud-ecs-cluster-sg",
     "SecurityGroupEgress": [
      {
       "CidrIp": "0.0.0.0/0",
@@ -37,7 +37,7 @@
       "ToPort": 443
      }
     ],
-    "VpcId": "vpc-038c375b10545b90c"
+    "VpcId": "vpc-0ce884638d6266990"
    },
    "Metadata": {
     "aws:cdk:path": "BitirmeECSClusterStack/BitirmeCloudECSClusterSecurityGroup/Resource"

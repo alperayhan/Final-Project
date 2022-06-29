@@ -1,0 +1,20 @@
+{
+  "version": "20.0.0",
+  "files": {
+    "dc69ca27aa5baaa0b47dd8ae07d17005a02c57dbc2f5510d5f55724052475553": {
+      "source": {
+        "path": "BitirmeCDNCloudfront.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "685655032460-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-685655032460-us-east-1",
+          "objectKey": "dc69ca27aa5baaa0b47dd8ae07d17005a02c57dbc2f5510d5f55724052475553.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-file-publishing-role-685655032460-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

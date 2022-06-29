@@ -3,7 +3,7 @@
   "BitirmeCDNBucketDCA694AC": {
    "Type": "AWS::S3::Bucket",
    "Properties": {
-    "BucketName": "717917102233-eu-central-1-bitirme-cdn-bucket",
+    "BucketName": "685655032460-eu-central-1-bitirme-cdn-bucket",
     "PublicAccessBlockConfiguration": {
      "BlockPublicAcls": true,
      "BlockPublicPolicy": true,

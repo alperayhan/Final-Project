@@ -1,0 +1,20 @@
+{
+  "version": "20.0.0",
+  "files": {
+    "a31623dc87e57b48a2410aec775fce6df471bb1eecd1b6a2dad84caeffb807e7": {
+      "source": {
+        "path": "PatikaServicesEnvBucketStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "685655032460-eu-central-1": {
+          "bucketName": "cdk-hnb659fds-assets-685655032460-eu-central-1",
+          "objectKey": "a31623dc87e57b48a2410aec775fce6df471bb1eecd1b6a2dad84caeffb807e7.json",
+          "region": "eu-central-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-file-publishing-role-685655032460-eu-central-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

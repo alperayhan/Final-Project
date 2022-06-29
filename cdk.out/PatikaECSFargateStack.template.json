@@ -1,0 +1,722 @@
+{
+ "Resources": {
+  "BitirmeBackendFargateServiceIAMRole680A6FBD": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "RoleName": "BitirmeBackendFargateServiceIAMRole"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendFargateServiceIAMRole/Resource"
+   }
+  },
+  "BitirmeBackendFargateServiceIAMRoleDefaultPolicy85D9A35B": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:GetAuthorizationToken",
+        "s3:*"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          "arn:",
+          {
+           "Ref": "AWS::Partition"
+          },
+          ":ecr:eu-central-1:685655032460:repository/bitirme-backend"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "BitirmeBackendFargateServiceIAMRoleDefaultPolicy85D9A35B",
+    "Roles": [
+     {
+      "Ref": "BitirmeBackendFargateServiceIAMRole680A6FBD"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendFargateServiceIAMRole/DefaultPolicy/Resource"
+   }
+  },
+  "BitirmeBackendFargateServiceTaskDefTaskRole812DDA16": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ecs-tasks.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendFargateServiceTaskDef/TaskRole/Resource"
+   }
+  },
+  "BitirmeBackendFargateServiceTaskDef5846DD0F": {
+   "Type": "AWS::ECS::TaskDefinition",
+   "Properties": {
+    "ContainerDefinitions": [
+     {
+      "EnvironmentFiles": [
+       {
+        "Type": "s3",
+        "Value": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::",
+           {
+            "Fn::ImportValue": "BitirmeServicesEnvBucketName"
+           },
+           "/Bitirme-backend/app.env"
+          ]
+         ]
+        }
+       }
+      ],
+      "Essential": true,
+      "Image": {
+       "Fn::Join": [
+        "",
+        [
+         {
+          "Fn::Select": [
+           4,
+           {
+            "Fn::Split": [
+             ":",
+             {
+              "Fn::Join": [
+               "",
+               [
+                "arn:",
+                {
+                 "Ref": "AWS::Partition"
+                },
+                ":ecr:eu-central-1:685655032460:repository/bitirme-backend"
+               ]
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         ".dkr.ecr.",
+         {
+          "Fn::Select": [
+           3,
+           {
+            "Fn::Split": [
+             ":",
+             {
+              "Fn::Join": [
+               "",
+               [
+                "arn:",
+                {
+                 "Ref": "AWS::Partition"
+                },
+                ":ecr:eu-central-1:685655032460:repository/bitirme-backend"
+               ]
+              ]
+             }
+            ]
+           }
+          ]
+         },
+         ".",
+         {
+          "Ref": "AWS::URLSuffix"
+         },
+         "/bitirme-backend:latest"
+        ]
+       ]
+      },
+      "MemoryReservation": 512,
+      "Name": "Bitirme-backend-service",
+      "PortMappings": [
+       {
+        "ContainerPort": 8080,
+        "Protocol": "tcp"
+       }
+      ]
+     }
+    ],
+    "Cpu": "512",
+    "ExecutionRoleArn": {
+     "Fn::GetAtt": [
+      "BitirmeBackendFargateServiceIAMRole680A6FBD",
+      "Arn"
+     ]
+    },
+    "Family": "BitirmeBackendFargateServiceTaskDef",
+    "Memory": "1024",
+    "NetworkMode": "awsvpc",
+    "RequiresCompatibilities": [
+     "FARGATE"
+    ],
+    "TaskRoleArn": {
+     "Fn::GetAtt": [
+      "BitirmeBackendFargateServiceTaskDefTaskRole812DDA16",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendFargateServiceTaskDef/Resource"
+   }
+  },
+  "BitirmeBackendECSFargateSecurityGroup4CED8204": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "PatikaECSFargateStack/BitirmeBackendECSFargateSecurityGroup",
+    "GroupName": "Bitirme-backend-ecs-farget-sg",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "vpc-0ce884638d6266990"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendECSFargateSecurityGroup/Resource"
+   }
+  },
+  "BitirmeBackendECSFargateSecurityGroupfromPatikaECSFargateStackALBsgBD0EB54E4915365535466E1348": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "allow access container ports from ALB",
+    "FromPort": 49153,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "BitirmeBackendECSFargateSecurityGroup4CED8204",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ALBsgDBC6A4CD",
+      "GroupId"
+     ]
+    },
+    "ToPort": 65535
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendECSFargateSecurityGroup/from PatikaECSFargateStackALBsgBD0EB54E:49153-65535"
+   }
+  },
+  "BitirmeBackendECSFargateSecurityGroupfromPatikaECSFargateStackALBsgBD0EB54E8080256E73CF": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "Description": "Load balancer to target",
+    "FromPort": 8080,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "BitirmeBackendECSFargateSecurityGroup4CED8204",
+      "GroupId"
+     ]
+    },
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "ALBsgDBC6A4CD",
+      "GroupId"
+     ]
+    },
+    "ToPort": 8080
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendECSFargateSecurityGroup/from PatikaECSFargateStackALBsgBD0EB54E:8080"
+   }
+  },
+  "BitirmeBackendFargateService2566D142": {
+   "Type": "AWS::ECS::Service",
+   "Properties": {
+    "Cluster": {
+     "Fn::ImportValue": "BitirmeECSClusterName"
+    },
+    "DeploymentConfiguration": {
+     "MaximumPercent": 200,
+     "MinimumHealthyPercent": 50
+    },
+    "DesiredCount": 3,
+    "EnableECSManagedTags": false,
+    "HealthCheckGracePeriodSeconds": 60,
+    "LaunchType": "FARGATE",
+    "LoadBalancers": [
+     {
+      "ContainerName": "Bitirme-backend-service",
+      "ContainerPort": 8080,
+      "TargetGroupArn": {
+       "Ref": "ServiceTargetGroup2CF394BF"
+      }
+     }
+    ],
+    "NetworkConfiguration": {
+     "AwsvpcConfiguration": {
+      "AssignPublicIp": "ENABLED",
+      "SecurityGroups": [
+       {
+        "Fn::GetAtt": [
+         "BitirmeBackendECSFargateSecurityGroup4CED8204",
+         "GroupId"
+        ]
+       }
+      ],
+      "Subnets": [
+       "subnet-0875a2fa36cd81115",
+       "subnet-06b5a567966d2bd82"
+      ]
+     }
+    },
+    "ServiceName": "bitirme-backend-service",
+    "TaskDefinition": {
+     "Ref": "BitirmeBackendFargateServiceTaskDef5846DD0F"
+    }
+   },
+   "DependsOn": [
+    "BitirmeBackendALBhttpListener45C1BB8D"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendFargateService/Service"
+   }
+  },
+  "BitirmeBackendFargateServiceTaskCountTargetCC8CBE9B": {
+   "Type": "AWS::ApplicationAutoScaling::ScalableTarget",
+   "Properties": {
+    "MaxCapacity": 8,
+    "MinCapacity": 1,
+    "ResourceId": {
+     "Fn::Join": [
+      "",
+      [
+       "service/",
+       {
+        "Fn::ImportValue": "BitirmeECSClusterName"
+       },
+       "/",
+       {
+        "Fn::GetAtt": [
+         "BitirmeBackendFargateService2566D142",
+         "Name"
+        ]
+       }
+      ]
+     ]
+    },
+    "RoleARN": {
+     "Fn::Join": [
+      "",
+      [
+       "arn:",
+       {
+        "Ref": "AWS::Partition"
+       },
+       ":iam::",
+       {
+        "Ref": "AWS::AccountId"
+       },
+       ":role/aws-service-role/ecs.application-autoscaling.amazonaws.com/AWSServiceRoleForApplicationAutoScaling_ECSService"
+      ]
+     ]
+    },
+    "ScalableDimension": "ecs:service:DesiredCount",
+    "ServiceNamespace": "ecs"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendFargateService/TaskCount/Target/Resource"
+   }
+  },
+  "ALBsgDBC6A4CD": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "PatikaECSFargateStack/ALBsg",
+    "GroupName": "Bitirme-cloud-alb-sg",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "allow access from anywhere to http port",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "allow access from anywhere to https port",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "VpcId": "vpc-0ce884638d6266990"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/ALBsg/Resource"
+   }
+  },
+  "BitirmeBackendALB755179AF": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Name": "Bitirme-cloud-alb",
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "ALBsgDBC6A4CD",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     "subnet-0875a2fa36cd81115",
+     "subnet-06b5a567966d2bd82"
+    ],
+    "Type": "application"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendALB/Resource"
+   }
+  },
+  "BitirmeBackendALBhttpListener45C1BB8D": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "ServiceTargetGroup2CF394BF"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "BitirmeBackendALB755179AF"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/BitirmeBackendALB/httpListener/Resource"
+   }
+  },
+  "ServiceTargetGroup2CF394BF": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckEnabled": true,
+    "HealthCheckPath": "/",
+    "HealthCheckPort": "8080",
+    "HealthCheckProtocol": "HTTP",
+    "Matcher": {
+     "HttpCode": "200"
+    },
+    "Name": "bitirme-backend-tg",
+    "Port": 80,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "TargetType": "ip",
+    "VpcId": "vpc-0ce884638d6266990"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/ServiceTargetGroup/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31RwU7DMAz9lt3TwAqHXekQCIkDWrkjN/Uqr1kyxenQVPXfcdNtdBw42X7Pfs9xcp2v9HIB35yZus0sVbovI5hWbZB9Fwwq4b56ftBFZ1qMBTAqgr3uN96iWm9dih/ekjmN5ZQNCg3r/gVCAxE/gdtn3JKjSN6NXX8R7yKQwzDDzrMlhiOZ5HRJSwMWKptk175zcXTLZXE0XaB4eg2+O0wD/wFvrgnIPCg4HGRnGF2hi55Fnlwjelef0GBM8zeI2FrgSMZ6qCthnJG5o2zy9Kv4LlyROAyjxE097yOO6M49l3zGT5bXl8zKYUjfcPkvyeWcdTrioJyvUe/47rhc6Ud9v9gxURbkZrRHvZniD+LB8QYFAgAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "PatikaECSFargateStack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-2"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

@@ -6,15 +6,14 @@ import {
   aws_ecs,
   aws_iam,
   aws_elasticloadbalancingv2,
-  aws_ssm,
   aws_certificatemanager,
   aws_route53,
   aws_route53_targets,
-  aws_cloudwatch
+  aws_cloudwatch,
+  aws_ssm
 } from 'aws-cdk-lib';
 import { CommonStackProps } from '../common-stack-props';
 import { getConfig } from '../config';
-import { SubnetType } from 'aws-cdk-lib/aws-ec2';
 
 export class ECSFargateStack extends Stack {
   constructor(scope: Construct, id: string, props?: CommonStackProps) {
@@ -29,7 +28,7 @@ export class ECSFargateStack extends Stack {
         availabilityZones: conf.availabilityZones,
         publicSubnetIds: conf.publicSubnetIds,
       });
-      
+
       const clusterSg = aws_ec2.SecurityGroup.fromSecurityGroupId(this, 'BitirmeCloudECSClusterSg', Fn.importValue('BitirmeCloudECSClusterSgId'));
 
       const cluster = aws_ecs.Cluster.fromClusterAttributes(this, 'BitirmeCloudECSCluster', {
@@ -74,9 +73,9 @@ export class ECSFargateStack extends Stack {
           }
         ],
         environment: {
-            DB_PASSWORD: aws_ssm.StringParameter.fromStringParameterName(this, 'DB_PASSWORD', '/app/DB_PASSWORD').stringValue,
-        }
-
+          DB_PASSWORD: aws_ssm.StringParameter.fromStringParameterName(this, 'DB_PASSWORD', '/app/DB_PASSWORD').stringValue,
+      }
+        //environmentFiles: [ aws_ecs.EnvironmentFile.fromBucket(envBucket, 'bitirme-backend/app.env') ]
       });
 
       const serviceSg = new aws_ec2.SecurityGroup(this, 'BitirmeBackendECSFargateSecurityGroup', {
@@ -92,37 +91,32 @@ export class ECSFargateStack extends Stack {
         desiredCount: 3,
         securityGroups: [serviceSg],
         assignPublicIp: true,
-        
-     
       });
-    
-      
+
       const autoscale = service.autoScaleTaskCount({
         minCapacity: 1,
         maxCapacity: 8,
       });
-      
-     
+
       const albSg = new aws_ec2.SecurityGroup(this, 'ALBsg', {
         securityGroupName: 'bitirme-cloud-alb-sg',
         vpc,
         allowAllOutbound: true,
       });
 
-
       albSg.addIngressRule(aws_ec2.Peer.anyIpv4(), aws_ec2.Port.tcp(80), 'allow access from anywhere to http port');
       albSg.addIngressRule(aws_ec2.Peer.anyIpv4(), aws_ec2.Port.tcp(443), 'allow access from anywhere to https port');
 
       serviceSg.addIngressRule(albSg, aws_ec2.Port.tcpRange(49153, 65535), 'allow access container ports from ALB');
-      
+
       const serviceAlb = new aws_elasticloadbalancingv2.ApplicationLoadBalancer(this, 'BitirmeBackendALB', {
         loadBalancerName: 'bitirme-cloud-alb',
         vpc,
         internetFacing: true,
-        securityGroup: albSg
-      }); 
+        securityGroup: albSg,
       
-      
+      });
+
       const serviceTargetGroup = new aws_elasticloadbalancingv2.ApplicationTargetGroup(this, 'ServiceTargetGroup', {
         healthCheck: {
           enabled: true,
@@ -137,19 +131,51 @@ export class ECSFargateStack extends Stack {
         targetType: aws_elasticloadbalancingv2.TargetType.IP,
         targets: [service],
         vpc,
-        
       });
       
-
-     
+      /*const httpListenerAction = aws_elasticloadbalancingv2.ListenerAction.redirect({
+        host: '#{host}',
+        path: '/#{path}',
+        port: '443',
+        protocol: 'HTTPS',
+        permanent: true,
+      });*/
       serviceAlb.addListener('httpListener', {
         port: 80,
         protocol: aws_elasticloadbalancingv2.ApplicationProtocol.HTTP,
-        defaultTargetGroups: [serviceTargetGroup]
-       
+        defaultTargetGroups: [serviceTargetGroup],
+        //defaultAction: httpListenerAction
       });
+      /*
+      const certificate = aws_certificatemanager.Certificate.fromCertificateArn(this, 'BitirmeBackendCert', 'arn:aws:acm:eu-central-1:238757817381:certificate/2e60feea-c563-4b6b-a00b-991b8fcf8fd2');
+
+      serviceAlb.addListener('httpsListener', {
+        port: 443,
+        protocol: aws_elasticloadbalancingv2.ApplicationProtocol.HTTPS,
+        defaultTargetGroups: [serviceTargetGroup],
+        certificates: [certificate]
+      });
+
+      autoscale.scaleOnRequestCount('scaleOnTargetGroup', {
+        requestsPerTarget: 10,
+        targetGroup: serviceTargetGroup,
+      });
+
+      // const hostedZone = aws_route53.HostedZone.fromHostedZoneId(this, 'BitirmeComHostedZone', 'Z0292877WFG79X9JE3AX');
+      const hostedZone = aws_route53.HostedZone.fromHostedZoneAttributes(this, 'BitirmeComHostedZone', {
+        hostedZoneId: 'Z0293787WFG79X9JE3AX', //insert your hosted zone ID here.
+        zoneName: 'yourDomain.com'
+      });
+
+      const target = new aws_route53_targets.LoadBalancerTarget(serviceAlb);
+    
+      new aws_route53.ARecord(this, 'ApiBitirmeBackendARecord', {
+        target: aws_route53.RecordTarget.fromAlias(target),
+        zone: hostedZone,
+        recordName: 'api-bitirme'
+      });*/
+
     }
 
   }
 }
-      

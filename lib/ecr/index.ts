@@ -1,5 +1,5 @@
-import { BitirmeBackendECRClusterStack } from './bitirme-backend-ecr-stack';
+import { BitirmeBackendECRStack } from './bitirme-backend-ecr-stack';
 
 export {
-    BitirmeBackendECRClusterStack,
+    BitirmeBackendECRStack,
 }

@@ -1,0 +1,19 @@
+{
+  "version": "20.0.0",
+  "files": {
+    "f84d3d5df236f19b7a16ab5e526d6f03fe4a1096c9efe4d9357883ceb3409c8d": {
+      "source": {
+        "path": "PatikaECSFargateStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "f84d3d5df236f19b7a16ab5e526d6f03fe4a1096c9efe4d9357883ceb3409c8d.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

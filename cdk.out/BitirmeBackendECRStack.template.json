@@ -1,0 +1,102 @@
+{
+ "Resources": {
+  "BitirmeBackendECRRepositoryC83C6EF2": {
+   "Type": "AWS::ECR::Repository",
+   "Properties": {
+    "RepositoryName": "bitirme-backend",
+    "RepositoryPolicyText": {
+     "Statement": [
+      {
+       "Action": [
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:BatchGetImage",
+        "ecr:GetDownloadUrlForLayer"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":iam::",
+           {
+            "Ref": "AWS::AccountId"
+           },
+           ":role/BitirmeBackendFargateServiceIAMRole"
+          ]
+         ]
+        }
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "BitirmeBackendECRStack/BitirmeBackendECRRepository/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/zPSM7LQM1RMLC/WTU7J1s3JTNKrDi5JTM7WAQrFpyYX6VUHpRbkF2eW5BdV6jin5SF4tSCuf2lJQWkJRKI4v7QoObVWJy8/JVUvq1i/zNBCz0TPQDGrODNTt6g0ryQzN1UvCEIDAMUAd3R4AAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeBackendECRStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "BitirmeBackendECRRepositoryARN": {
+   "Value": {
+    "Fn::GetAtt": [
+     "BitirmeBackendECRRepositoryC83C6EF2",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "BitirmeBackendECRRepositoryARN"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

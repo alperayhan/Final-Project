@@ -1,0 +1,20 @@
+{
+  "version": "20.0.0",
+  "files": {
+    "ae37756f385509e6f2b915459a9f5b9997d5d662a7ff99ef4fdc25950be05cd2": {
+      "source": {
+        "path": "BitirmeVPNServer.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "685655032460-eu-central-1": {
+          "bucketName": "cdk-hnb659fds-assets-685655032460-eu-central-1",
+          "objectKey": "ae37756f385509e6f2b915459a9f5b9997d5d662a7ff99ef4fdc25950be05cd2.json",
+          "region": "eu-central-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::685655032460:role/cdk-hnb659fds-file-publishing-role-685655032460-eu-central-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

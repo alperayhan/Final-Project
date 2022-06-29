@@ -26,7 +26,7 @@ export class BitirmeECSClusterStack extends Stack {
     const clusterSg = new aws_ec2.SecurityGroup(this, 'BitirmeCloudECSClusterSecurityGroup', {
       vpc,
       allowAllOutbound: true,
-      securityGroupName: 'Bitirme-cloud-ecs-cluster-sg'
+      securityGroupName: 'bitirme-cloud-ecs-cluster-sg'
     });
 
     clusterSg.addIngressRule(aws_ec2.Peer.anyIpv4(), aws_ec2.Port.tcp(80), 'allow access from anywhere to http port');
