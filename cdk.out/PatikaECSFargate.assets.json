@@ -1,0 +1,20 @@
+{
+  "version": "20.0.0",
+  "files": {
+    "b49602e05019c62e370ede27a0b84c9625b4198ea45947aa24065544deece468": {
+      "source": {
+        "path": "PatikaECSFargate.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "717917102233-eu-central-1": {
+          "bucketName": "cdk-hnb659fds-assets-717917102233-eu-central-1",
+          "objectKey": "b49602e05019c62e370ede27a0b84c9625b4198ea45947aa24065544deece468.json",
+          "region": "eu-central-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-file-publishing-role-717917102233-eu-central-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

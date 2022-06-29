@@ -1,0 +1,145 @@
+{
+ "Resources": {
+  "BitirmeVPNServerSG24663BB3": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "BitirmeVpnStack/BitirmeVPNServerSG",
+    "GroupName": "bitirme-vpn-server-sg",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpnStack/BitirmeVPNServerSG/Resource"
+   }
+  },
+  "BitirmeVPNServerInstanceRole79556F8C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BitirmeVpnStack/BitirmeVPNServer"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpnStack/BitirmeVPNServer/InstanceRole/Resource"
+   }
+  },
+  "BitirmeVPNServerInstanceProfile2CE11C5A": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "BitirmeVPNServerInstanceRole79556F8C"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpnStack/BitirmeVPNServer/InstanceProfile"
+   }
+  },
+  "BitirmeVPNServer3BC8AB86": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": "eu-central-1a",
+    "IamInstanceProfile": {
+     "Ref": "BitirmeVPNServerInstanceProfile2CE11C5A"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t3.micro",
+    "KeyName": "Patika2",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "BitirmeVPNServerSG24663BB3",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": "subnet-0c6588e8b9527962e",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BitirmeVpnStack/BitirmeVPNServer"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash"
+    }
+   },
+   "DependsOn": [
+    "BitirmeVPNServerInstanceRole79556F8C"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpnStack/BitirmeVPNServer/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WNOw7CMBBEz5LeWYhFkZ4C0UXhAMg4G2kTf9DaBqHId8cEUlDN6r0djQTZQlOpZ6j1MNeGbrBcotKz6DH4xBpFcdcFtSwCdWKKrxP7dBfH0f2DswtRudIoZruzIGVh6b1Z8Zab7tiPZDDnD+wUK4sRef38zWfh/IAwhd2jaeEA+2oKRDUnF8ki9N98A1dCebLHAAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpnStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

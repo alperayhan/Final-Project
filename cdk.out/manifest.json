@@ -1,0 +1,301 @@
+{
+  "version": "20.0.0",
+  "artifacts": {
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    },
+    "BitirmeECSClusterStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "BitirmeECSClusterStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "BitirmeECSClusterStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://717917102233/eu-central-1",
+      "properties": {
+        "templateFile": "BitirmeECSClusterStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-deploy-role-717917102233-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-cfn-exec-role-717917102233-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-717917102233-eu-central-1/46a58b3e4b3fff8377eeab65b53b4493de5014126f9daa8d38f479bce4eceead.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "BitirmeECSClusterStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-lookup-role-717917102233-eu-central-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "BitirmeECSClusterStack.assets"
+      ],
+      "metadata": {
+        "/BitirmeECSClusterStack/BitirmeCloudECSCluster/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeCloudECSCluster56462100"
+          }
+        ],
+        "/BitirmeECSClusterStack/BitirmeCloudECSClusterSecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeCloudECSClusterSecurityGroup1004D72A"
+          }
+        ],
+        "/BitirmeECSClusterStack/BitirmeCloudECSClusterARN": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeCloudECSClusterARN"
+          }
+        ],
+        "/BitirmeECSClusterStack/BitirmeCloudECSClusterName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeCloudECSClusterName"
+          }
+        ],
+        "/BitirmeECSClusterStack/BitirmeCloudECSClusterSgId": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeCloudECSClusterSgId"
+          }
+        ],
+        "/BitirmeECSClusterStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/BitirmeECSClusterStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/BitirmeECSClusterStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "BitirmeECSClusterStack"
+    },
+    "BitirmeBackendECRClusterStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "BitirmeBackendECRClusterStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "BitirmeBackendECRClusterStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://717917102233/eu-central-1",
+      "properties": {
+        "templateFile": "BitirmeBackendECRClusterStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-deploy-role-717917102233-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-cfn-exec-role-717917102233-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-717917102233-eu-central-1/9ac1328a2caba2cdd15c61a6a85949a364e91877294d86d3e2e354cee5488ab4.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "BitirmeBackendECRClusterStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-lookup-role-717917102233-eu-central-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "BitirmeBackendECRClusterStack.assets"
+      ],
+      "metadata": {
+        "/BitirmeBackendECRClusterStack/BitirmeBackendECRRepository/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendECRRepositoryC83C6EF2"
+          }
+        ],
+        "/BitirmeBackendECRClusterStack/BitirmeBackendECRRepositoryARN": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeBackendECRRepositoryARN"
+          }
+        ],
+        "/BitirmeBackendECRClusterStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/BitirmeBackendECRClusterStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/BitirmeBackendECRClusterStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "BitirmeBackendECRClusterStack"
+    },
+    "BitirmeServicesEnvBucketStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "BitirmeServicesEnvBucketStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "BitirmeServicesEnvBucketStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://717917102233/eu-central-1",
+      "properties": {
+        "templateFile": "BitirmeServicesEnvBucketStack.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-deploy-role-717917102233-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-cfn-exec-role-717917102233-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-717917102233-eu-central-1/6fcba336c3a436fab9db4c5c8a01f7f344a5a2dcb09ad55d32d22c1c4e38f00b.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "BitirmeServicesEnvBucketStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-lookup-role-717917102233-eu-central-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "BitirmeServicesEnvBucketStack.assets"
+      ],
+      "metadata": {
+        "/BitirmeServicesEnvBucketStack/BitirmeServicesEnvBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeServicesEnvBucketBBA4484B"
+          }
+        ],
+        "/BitirmeServicesEnvBucketStack/BitirmeServicesEnvBucketARN": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeServicesEnvBucketARN"
+          }
+        ],
+        "/BitirmeServicesEnvBucketStack/BitirmeServicesEnvBucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeServicesEnvBucketName"
+          }
+        ],
+        "/BitirmeServicesEnvBucketStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/BitirmeServicesEnvBucketStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/BitirmeServicesEnvBucketStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "BitirmeServicesEnvBucketStack"
+    },
+    "BitirmeCDNBucket.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "BitirmeCDNBucket.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "BitirmeCDNBucket": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://717917102233/eu-central-1",
+      "properties": {
+        "templateFile": "BitirmeCDNBucket.template.json",
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-deploy-role-717917102233-eu-central-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-cfn-exec-role-717917102233-eu-central-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-717917102233-eu-central-1/2299a85f6c568da1e3f415a860e52212661151d10bed6a1aee532ca6e1643e9c.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "BitirmeCDNBucket.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-lookup-role-717917102233-eu-central-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "BitirmeCDNBucket.assets"
+      ],
+      "metadata": {
+        "/BitirmeCDNBucket/BitirmeCDNBucket/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeCDNBucketDCA694AC"
+          }
+        ],
+        "/BitirmeCDNBucket/BitirmeCDNBucketARN": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeCDNBucketARN"
+          }
+        ],
+        "/BitirmeCDNBucket/BitirmeCDNBucketName": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BitirmeCDNBucketName"
+          }
+        ],
+        "/BitirmeCDNBucket/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/BitirmeCDNBucket/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/BitirmeCDNBucket/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "BitirmeCDNBucket"
+    }
+  }
+}

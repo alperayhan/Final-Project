@@ -1,0 +1,20 @@
+{
+  "version": "20.0.0",
+  "files": {
+    "9ac1328a2caba2cdd15c61a6a85949a364e91877294d86d3e2e354cee5488ab4": {
+      "source": {
+        "path": "BitirmeBackendECRClusterStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "717917102233-eu-central-1": {
+          "bucketName": "cdk-hnb659fds-assets-717917102233-eu-central-1",
+          "objectKey": "9ac1328a2caba2cdd15c61a6a85949a364e91877294d86d3e2e354cee5488ab4.json",
+          "region": "eu-central-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::717917102233:role/cdk-hnb659fds-file-publishing-role-717917102233-eu-central-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

@@ -1,0 +1,229 @@
+{
+ "Resources": {
+  "BitirmeVPC71980C7E": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "bitirme-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/Resource"
+   }
+  },
+  "BitirmeVPCpublicSubnetSubnet1Subnet808629AB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BitirmeVPC71980C7E"
+    },
+    "AvailabilityZone": "eu-central-1a",
+    "CidrBlock": "10.0.0.0/17",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "publicSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "BitirmeVpcStack/BitirmeVPC/publicSubnetSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/publicSubnetSubnet1/Subnet"
+   }
+  },
+  "BitirmeVPCpublicSubnetSubnet1RouteTable666FF4A1": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BitirmeVPC71980C7E"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BitirmeVpcStack/BitirmeVPC/publicSubnetSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/publicSubnetSubnet1/RouteTable"
+   }
+  },
+  "BitirmeVPCpublicSubnetSubnet1RouteTableAssociation9A2D1049": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BitirmeVPCpublicSubnetSubnet1RouteTable666FF4A1"
+    },
+    "SubnetId": {
+     "Ref": "BitirmeVPCpublicSubnetSubnet1Subnet808629AB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/publicSubnetSubnet1/RouteTableAssociation"
+   }
+  },
+  "BitirmeVPCpublicSubnetSubnet1DefaultRouteEABB3DB5": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BitirmeVPCpublicSubnetSubnet1RouteTable666FF4A1"
+    },
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "BitirmeVPCIGW31F01952"
+    }
+   },
+   "DependsOn": [
+    "BitirmeVPCVPCGW1FFF74AA"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/publicSubnetSubnet1/DefaultRoute"
+   }
+  },
+  "BitirmeVPCPrivateSubnetSubnet1Subnet296BE31A": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BitirmeVPC71980C7E"
+    },
+    "AvailabilityZone": "eu-central-1a",
+    "CidrBlock": "10.0.128.0/17",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "PrivateSubnet"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Isolated"
+     },
+     {
+      "Key": "Name",
+      "Value": "BitirmeVpcStack/BitirmeVPC/PrivateSubnetSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/PrivateSubnetSubnet1/Subnet"
+   }
+  },
+  "BitirmeVPCPrivateSubnetSubnet1RouteTableB2322FAC": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BitirmeVPC71980C7E"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "BitirmeVpcStack/BitirmeVPC/PrivateSubnetSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/PrivateSubnetSubnet1/RouteTable"
+   }
+  },
+  "BitirmeVPCPrivateSubnetSubnet1RouteTableAssociation1C15C31A": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "BitirmeVPCPrivateSubnetSubnet1RouteTableB2322FAC"
+    },
+    "SubnetId": {
+     "Ref": "BitirmeVPCPrivateSubnetSubnet1Subnet296BE31A"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/PrivateSubnetSubnet1/RouteTableAssociation"
+   }
+  },
+  "BitirmeVPCIGW31F01952": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "bitirme-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/IGW"
+   }
+  },
+  "BitirmeVPCVPCGW1FFF74AA": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "VpcId": {
+     "Ref": "BitirmeVPC71980C7E"
+    },
+    "InternetGatewayId": {
+     "Ref": "BitirmeVPCIGW31F01952"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/BitirmeVPC/VPCGW"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/0WOwQ6CMAyGn4X7mEI8cCUcjDcChqsZo8YibGbrIIbw7k5Fd+rXL03/P+VpxpNIzDaW3T0esOVLTULemVcXkClfmodkxVU1ZcFK1w4oa9cqoLcLVGlHcBbtAMEHl1urJQpCrf7HrDQ4CYLw46QIjOejt7N4bqHblpNvdRtB0coqsNoZ+Yn68cqU7oD3djclGT/wfdRbxNg4RTgCr77zBeNS/afvAAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeVpcStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

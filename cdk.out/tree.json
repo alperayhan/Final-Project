@@ -1,0 +1,362 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.1.42"
+        }
+      },
+      "BitirmeECSClusterStack": {
+        "id": "BitirmeECSClusterStack",
+        "path": "BitirmeECSClusterStack",
+        "children": {
+          "Vpc": {
+            "id": "Vpc",
+            "path": "BitirmeECSClusterStack/Vpc",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeCloudECSCluster": {
+            "id": "BitirmeCloudECSCluster",
+            "path": "BitirmeECSClusterStack/BitirmeCloudECSCluster",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "BitirmeECSClusterStack/BitirmeCloudECSCluster/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECS::Cluster",
+                  "aws:cdk:cloudformation:props": {
+                    "clusterName": "bitirme-cloud-cluster"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecs.CfnCluster",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecs.Cluster",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeCloudECSClusterSecurityGroup": {
+            "id": "BitirmeCloudECSClusterSecurityGroup",
+            "path": "BitirmeECSClusterStack/BitirmeCloudECSClusterSecurityGroup",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "BitirmeECSClusterStack/BitirmeCloudECSClusterSecurityGroup/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "BitirmeECSClusterStack/BitirmeCloudECSClusterSecurityGroup",
+                    "groupName": "Bitirme-cloud-ecs-cluster-sg",
+                    "securityGroupEgress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "description": "Allow all outbound traffic by default",
+                        "ipProtocol": "-1"
+                      }
+                    ],
+                    "securityGroupIngress": [
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 80,
+                        "toPort": 80,
+                        "description": "allow access from anywhere to http port"
+                      },
+                      {
+                        "cidrIp": "0.0.0.0/0",
+                        "ipProtocol": "tcp",
+                        "fromPort": 443,
+                        "toPort": 443,
+                        "description": "allow access from anywhere to https port"
+                      }
+                    ],
+                    "vpcId": "vpc-038c375b10545b90c"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeCloudECSClusterARN": {
+            "id": "BitirmeCloudECSClusterARN",
+            "path": "BitirmeECSClusterStack/BitirmeCloudECSClusterARN",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeCloudECSClusterName": {
+            "id": "BitirmeCloudECSClusterName",
+            "path": "BitirmeECSClusterStack/BitirmeCloudECSClusterName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeCloudECSClusterSgId": {
+            "id": "BitirmeCloudECSClusterSgId",
+            "path": "BitirmeECSClusterStack/BitirmeCloudECSClusterSgId",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.28.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "BitirmeECSClusterStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "BitirmeECSClusterStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.42"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.28.1"
+        }
+      },
+      "BitirmeBackendECRClusterStack": {
+        "id": "BitirmeBackendECRClusterStack",
+        "path": "BitirmeBackendECRClusterStack",
+        "children": {
+          "BitirmeBackendECRRepository": {
+            "id": "BitirmeBackendECRRepository",
+            "path": "BitirmeBackendECRClusterStack/BitirmeBackendECRRepository",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "BitirmeBackendECRClusterStack/BitirmeBackendECRRepository/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::ECR::Repository",
+                  "aws:cdk:cloudformation:props": {
+                    "repositoryName": "bitirme-backend"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ecr.CfnRepository",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ecr.Repository",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeBackendECRRepositoryARN": {
+            "id": "BitirmeBackendECRRepositoryARN",
+            "path": "BitirmeBackendECRClusterStack/BitirmeBackendECRRepositoryARN",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.28.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "BitirmeBackendECRClusterStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "BitirmeBackendECRClusterStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.42"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.28.1"
+        }
+      },
+      "BitirmeServicesEnvBucketStack": {
+        "id": "BitirmeServicesEnvBucketStack",
+        "path": "BitirmeServicesEnvBucketStack",
+        "children": {
+          "BitirmeServicesEnvBucket": {
+            "id": "BitirmeServicesEnvBucket",
+            "path": "BitirmeServicesEnvBucketStack/BitirmeServicesEnvBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "BitirmeServicesEnvBucketStack/BitirmeServicesEnvBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "bucketName": "717917102233-eu-central-1-bitirme-services-env-bucket",
+                    "publicAccessBlockConfiguration": {
+                      "blockPublicAcls": true,
+                      "blockPublicPolicy": true,
+                      "restrictPublicBuckets": true,
+                      "ignorePublicAcls": true
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeServicesEnvBucketARN": {
+            "id": "BitirmeServicesEnvBucketARN",
+            "path": "BitirmeServicesEnvBucketStack/BitirmeServicesEnvBucketARN",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeServicesEnvBucketName": {
+            "id": "BitirmeServicesEnvBucketName",
+            "path": "BitirmeServicesEnvBucketStack/BitirmeServicesEnvBucketName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.28.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "BitirmeServicesEnvBucketStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "BitirmeServicesEnvBucketStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.42"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.28.1"
+        }
+      },
+      "BitirmeCDNBucket": {
+        "id": "BitirmeCDNBucket",
+        "path": "BitirmeCDNBucket",
+        "children": {
+          "BitirmeCDNBucket": {
+            "id": "BitirmeCDNBucket",
+            "path": "BitirmeCDNBucket/BitirmeCDNBucket",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "BitirmeCDNBucket/BitirmeCDNBucket/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {
+                    "bucketName": "717917102233-eu-central-1-bitirme-cdn-bucket",
+                    "publicAccessBlockConfiguration": {
+                      "blockPublicAcls": true,
+                      "blockPublicPolicy": true,
+                      "restrictPublicBuckets": true,
+                      "ignorePublicAcls": true
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeCDNBucketARN": {
+            "id": "BitirmeCDNBucketARN",
+            "path": "BitirmeCDNBucket/BitirmeCDNBucketARN",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.28.1"
+            }
+          },
+          "BitirmeCDNBucketName": {
+            "id": "BitirmeCDNBucketName",
+            "path": "BitirmeCDNBucket/BitirmeCDNBucketName",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnOutput",
+              "version": "2.28.1"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "BitirmeCDNBucket/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "BitirmeCDNBucket/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.28.1"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.1.42"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.28.1"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.28.1"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+ "Resources": {
+  "BitirmeCDNBucketDCA694AC": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "717917102233-eu-central-1-bitirme-cdn-bucket",
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": true,
+     "BlockPublicPolicy": true,
+     "IgnorePublicAcls": true,
+     "RestrictPublicBuckets": true
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "BitirmeCDNBucket/BitirmeCDNBucket/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/yXISw5AMBCA4bPYt+O5sOYAEg4g1EiqlHQ6LMTdvVb/lz+BJIc46A6SajBy1j2cje+UEc9qKYWzYGXQi3K0v66XFfuNv1kjrewUXsKuA8JE4R7nkEEUTKS1dGy9XhDqvzcX7TiybwAAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeCDNBucket/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "BitirmeCDNBucketARN": {
+   "Value": {
+    "Fn::GetAtt": [
+     "BitirmeCDNBucketDCA694AC",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "BitirmeCDNBucket"
+   }
+  },
+  "BitirmeCDNBucketName": {
+   "Value": {
+    "Ref": "BitirmeCDNBucketDCA694AC"
+   },
+   "Export": {
+    "Name": "BitirmeCDNBucketName"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

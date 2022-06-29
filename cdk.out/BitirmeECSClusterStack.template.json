@@ -1,0 +1,122 @@
+{
+ "Resources": {
+  "BitirmeCloudECSCluster56462100": {
+   "Type": "AWS::ECS::Cluster",
+   "Properties": {
+    "ClusterName": "bitirme-cloud-cluster"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSClusterStack/BitirmeCloudECSCluster/Resource"
+   }
+  },
+  "BitirmeCloudECSClusterSecurityGroup1004D72A": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "BitirmeECSClusterStack/BitirmeCloudECSClusterSecurityGroup",
+    "GroupName": "Bitirme-cloud-ecs-cluster-sg",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "allow access from anywhere to http port",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     },
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "allow access from anywhere to https port",
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "VpcId": "vpc-038c375b10545b90c"
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSClusterStack/BitirmeCloudECSClusterSecurityGroup/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WMsQ7CMAxEv6V7amjE0L0DI1L5AFRcI6UtSRXbIBTl32kEDEz3dE93FmwLTTU8ucZxrhd3hXSWAWfTEweNSGZzl0TIkLpFWSia7ua/mA2h3RaEGp28jjHoWvRfkXOpTiqrSqHfczY+jAQT7x5NCwfYVxM7V0f14u4E/Sffyn9Ic6IAAAA="
+   },
+   "Metadata": {
+    "aws:cdk:path": "BitirmeECSClusterStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Outputs": {
+  "BitirmeCloudECSClusterARN": {
+   "Value": {
+    "Fn::GetAtt": [
+     "BitirmeCloudECSCluster56462100",
+     "Arn"
+    ]
+   },
+   "Export": {
+    "Name": "BitirmeCloudECSClusterARN"
+   }
+  },
+  "BitirmeCloudECSClusterName": {
+   "Value": {
+    "Ref": "BitirmeCloudECSCluster56462100"
+   },
+   "Export": {
+    "Name": "BitirmeCloudECSClusterName"
+   }
+  },
+  "BitirmeCloudECSClusterSgId": {
+   "Value": {
+    "Fn::GetAtt": [
+     "BitirmeCloudECSClusterSecurityGroup1004D72A",
+     "GroupId"
+    ]
+   },
+   "Export": {
+    "Name": "BitirmeCloudECSClusterSgId"
+   }
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
