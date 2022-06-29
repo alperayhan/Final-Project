@@ -13,6 +13,7 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template
 
+This repo contains only source files. The files are under these directories : lib, bin
 # For VPC Stack Deploy 
 cdk synth --app "npx ts-node bin/bitirme.ts" BitirmeVpcStack
 cdk deploy --app "npx ts-node bin/bitirme.ts" BitirmeVpcStack
